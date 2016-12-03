@@ -1,5 +1,5 @@
 COMMONFLAGS := -W -Wall -W -Werror -MMD -MP -O -g -Wno-missing-field-initializers
-CFLAGS := -std=gnu99 -m32 $(COMMONFLAGS) -Wno-missing-field-initializers
+CFLAGS := -std=gnu99 $(COMMONFLAGS) -Wno-missing-field-initializers
 CXXFLAGS := -std=c++11 $(COMMONFLAGS)
 
 uname := $(shell uname)
@@ -61,7 +61,7 @@ COBJS := $(addprefix out/,$(notdir $(CSRCS:.c=.o)))
 $(COBJS): out/%.o: ir/%.c
 	$(CC) -c -I. $(CFLAGS) $< -o $@
 
-ELC_SRCS := elc.c util.c rb.c py.c tf.c js.c php.c el.c vim.c tex.c cl.c sh.c sed.c java.c swift.c c.c cpp.c x86.c i.c ws.c piet.c pietasm.c bef.c bf.c unl.c
+ELC_SRCS := elc.c util.c rb.c py.c tf.c js.c php.c el.c vim.c tex.c cl.c sh.c sed.c java.c swift.c c.c cpp.c x86.c i.c ws.c piet.c pietasm.c bef.c bf.c unl.c sb.c
 ELC_SRCS := $(addprefix target/,$(ELC_SRCS))
 COBJS := $(addprefix out/,$(notdir $(ELC_SRCS:.c=.o)))
 $(COBJS): out/%.o: target/%.c
@@ -310,6 +310,9 @@ TEST_FILTER := out/eli.c.eir.unl out/dump_ir.c.eir.unl
 endif
 include target.mk
 $(OUT.eir.unl.out): tools/rununl.sh
+
+TARGET := sb
+include target.mk
 
 test: $(TEST_RESULTS)
 
