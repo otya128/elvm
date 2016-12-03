@@ -12,7 +12,7 @@ static void init_state_sb(Data* data) {
     emit_line("VAR %s=0", reg_names[i]);
   }
 
-  emit_line("DIM MEM[1<<24]");
+  emit_line("DIM MEM[1<<20]");
   for (int mp = 0; data; data = data->next, mp++) {
     if (data->v) {
       emit_line("MEM[%d]=%d", mp, data->v);
